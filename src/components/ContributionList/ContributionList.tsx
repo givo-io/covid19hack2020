@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import Button from '../Button/Button'
+import Button from '../Button/Button';
+import FilterButton from '../FilterButton/FilterButton';
 import {
     List,
     ListItemSecondaryAction,
@@ -33,12 +34,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ContributionList = () => {
-    const classes = useStyles();
-    const [checked, setChecked] = React.useState([1]);
+const classes = useStyles();
 
   return (
     <Grid container  className={classes.root} spacing={3} direction="column" justify="space-between" alignItems="center" >
-        <Grid item className={classes.root}>
+        <Grid className={classes.root}>
 
             <h3>
                 Contributions
@@ -48,22 +48,22 @@ const ContributionList = () => {
             </Button>
         
         </Grid>
-        <Grid item xs={6} className={classes.root} >
+        <Grid xs={6} className={classes.root}>
             <List className={classes.root}>
-            {[0, 1, 2, 3].map(value => {
-                const labelId = `checkbox-list-secondary-label-${value}`;
+            {[0, 1, 2, 3].map(index => {
+                const labelId = `checkbox-list-secondary-label-${index}`;
                 return (
                 <Paper>
-                    <ListItem key={value} button>
+                    <ListItem key={index} button>
                         <ListItemAvatar>
                         <Avatar
-                            alt={`Avatar n°${value + 1}`}
-                            src={`/static/images/avatar/${value + 1}.jpg`}
+                            alt={`Avatar n°${index + 1}`}
+                            src={`/static/images/avatar/${index + 1}.jpg`}
                         />
                         </ListItemAvatar>
-                        <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                        <ListItemText id={labelId} primary={`Line item ${index + 1}`} secondary='test'/>
                         <ListItemSecondaryAction>
-                            // insert tags here
+                            <FilterButton text={"test"}/>
                         </ListItemSecondaryAction>
                     </ListItem>
                 </Paper>
