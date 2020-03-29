@@ -59,7 +59,7 @@ const classes = useStyles();
                                     </ListItemAvatar>
                                     <ListItemText id={labelId} primary={`Line item ${index + 1}`} secondary='test'/>
                                     <ListItemSecondaryAction>
-                                        <FilterButton text={"test"}/>
+                                        <FilterButton>test</FilterButton>
                                     </ListItemSecondaryAction>
                                 </ListItem>
                             </Paper>
