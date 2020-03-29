@@ -1,16 +1,14 @@
 import React from 'react';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import { createStyles, Theme, makeStyles, fade } from '@material-ui/core/styles';
 import Button from '../Button/Button';
-import FilterButton from '../FilterButton/FilterButton';
+import ContributionListItem from '../ContributionListItem/ContributionListItem';
+import Page from '../../views/Page';
 import {
-    List,
-    ListItemSecondaryAction,
-    ListItemText,
-    ListItem,
-    ListItemAvatar,
-    Avatar,
+    Typography,
     Grid,
-    Paper,
+    InputBase,
+    IconButton,
+    TextField
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,6 +23,43 @@ const useStyles = makeStyles((theme: Theme) =>
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    contributions: {
+        marginTop: '60px',
+        [theme.breakpoints.down('md')]: {
+          marginTop: '60px',
+        }
+      },
+      welcome: {
+        color: '#DD4E31',
+        fontWeight: 'bold',
+        fontSize: '48px',
+        lineHeight: '48px',
+        letterSpacing: '0.01em',
+      },
+      bottom: {
+        minHeight: '186px',
+        paddingTop: '60px'
+      },
+      search: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: fade(theme.palette.common.white, 0.15),
+        '&:hover': {
+          backgroundColor: fade(theme.palette.common.white, 0.25),
+        },
+        marginRight: theme.spacing(2),
+        marginLeft: 0,
+        marginTop: 60,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+          marginLeft: theme.spacing(3),
+          width: 'auto',
+        },
+      },
+      inputInput: {
+        width: "100%",
+  
+      }
   }),
 );
 
@@ -32,43 +67,34 @@ const ContributionList = () => {
 const classes = useStyles();
 
   return (
-    <Grid container className={classes.root} spacing={3} direction="column" justify="space-between" alignItems="center" >
-        <Grid container >
-            <Grid className={classes.root} xs={12}>
-                <h3>
-                    Contributions
-                </h3>
-                <Button>
-                    create contribution
-                </Button>
+    <Page>
+        <Grid container direction="column">
+
+        <Grid className={classes.search}>
+            <Grid item xs={12}>
+                <TextField id="outlined-basic" label="🔎 Search..." variant="outlined" className={classes.inputInput}/>
+            </Grid>
+          </Grid>
+
+            <Grid container justify="space-between" className={classes.contributions}>
+                <Grid item direction="column">
+                    <Typography variant="h5">Your Contributions</Typography>
+                    <Typography variant="subtitle2">Review and manage your contributions</Typography>
+                </Grid>
+                
+                <Button>ADD CONTRIBUTION</Button>
+            </Grid>
+
+            <Grid container justify="center" spacing={3} className={classes.bottom}>
+                <Grid item>
+                    <ContributionListItem />
+                </Grid>
+                <Grid item>
+                    <ContributionListItem />
+                </Grid>
             </Grid>
         </Grid>
-        <Grid container>
-            <Grid className={classes.root} xs={8}>
-                <List className={classes.root}>
-                    {[0, 1, 2, 3].map(index => {
-                        const labelId = `checkbox-list-secondary-label-${index}`; 
-                        return (
-                            <Paper>
-                                <ListItem key={index} button>
-                                    <ListItemAvatar>
-                                    <Avatar
-                                        alt={`Avatar n°${index + 1}`}
-                                        src={`/static/images/avatar/${index + 1}.jpg`}
-                                    />
-                                    </ListItemAvatar>
-                                    <ListItemText id={labelId} primary={`Line item ${index + 1}`} secondary='test'/>
-                                    <ListItemSecondaryAction>
-                                        <FilterButton>Test</FilterButton>
-                                    </ListItemSecondaryAction>
-                                </ListItem>
-                            </Paper>
-                        );
-                    })}
-                </List>
-            </Grid>
-        </Grid>
-    </Grid>
+    </Page>
   );
 };
 
