@@ -13,16 +13,26 @@ import {
   Paper,
   ClickAwayListener,
   MenuList,
-  Box
+  Box,
+  Typography
 } from '@material-ui/core';
 import Button from '../Button';
 import testImage from '../../assets/test.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    button: {
-      marginRight: theme.spacing(4),
+    root: {
+      borderRadius: 20,
+      boxShadow: '0px 4px 6px rgba(50, 50, 93, 0.0011), 0px 1px 3px rgba(0, 0, 0, 0.08)'
     },
+    button: {
+      marginLeft: theme.spacing(4),
+    },
+    avatar: {
+      borderRadius: 12,
+      width: '52px',
+      height: '52px'
+    }
   }),
 );
 
@@ -61,12 +71,13 @@ const AppBar = () => {
   }, [open]);
 
   return (
-    <MuiAppBar position="static">
-      <Toolbar>
+    <MuiAppBar color="transparent" position="static" className={classes.root}>
+      <Toolbar disableGutters>
         <Button className={classes.button}>Home</Button>
         <Button className={classes.button}>Contributions</Button>
         <Button className={classes.button}>Messages</Button>
         <Box flexGrow={1}/>
+        <Typography variant="subtitle2">Dokedu UG</Typography>
         <IconButton
           ref={anchorRef}
           aria-label="user profile"
@@ -75,7 +86,7 @@ const AppBar = () => {
           onClick={handleToggle}
           color="inherit"
         >
-          <Avatar src={testImage} />
+          <Avatar src={testImage} className={classes.avatar} />
         </IconButton>
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
