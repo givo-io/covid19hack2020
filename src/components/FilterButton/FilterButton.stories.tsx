@@ -5,4 +5,4 @@ export default {
   title: 'Components/FilterButton',
 };
 
-export const Component = () => <FilterButton/>;
+export const Component = () => <FilterButton variant="outlined">Filter Button</FilterButton>;

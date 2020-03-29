@@ -1,30 +1,22 @@
 import {
-    Button,
-    makeStyles,
-    Theme,
-    createStyles,
+  Theme,
+  withStyles,
+  Button,
 } from '@material-ui/core';
-import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: {
-      marginRight: theme.spacing(4),
+const FilterButton = withStyles((theme: Theme) => {
+  return {
+    root: {
+      marginRight: theme.spacing(2),
+      borderRadius: 8,
+      border: 'none',
+      background: '#F2F2F2',
+      padding: '2px 7px',
     },
-  }),
-);
+    label: {
+      textTransform: 'none',
+    }
+  };
+})(Button);
 
-const FilterButton = (props: any) => {
-    const classes = useStyles();
-    return (
-    <Button variant="outlined">
-        {
-            props.text 
-                ? props.text 
-                : ""
-        }
-    </Button>
-    )
-  }
-  
-  export default FilterButton;
+export default FilterButton;
