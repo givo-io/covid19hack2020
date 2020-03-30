@@ -1,6 +1,7 @@
 import React from 'react';
 import LoginForm from '../../components/LoginForm';
 import { Card, CardContent, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,8 +14,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const Login = () => {
+const Login = (props: any) => {
   const classes = useStyles();
+
+  const toHome = () => {
+    props.history.push('/');
+  };
 
   return (
     <Grid
@@ -28,7 +33,7 @@ const Login = () => {
       <Grid item>
         <Card className={classes.card}>
           <CardContent>
-            <LoginForm />
+            <LoginForm toHome={toHome} />
           </CardContent>
         </Card>
       </Grid>
@@ -36,4 +41,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default withRouter(Login);

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const LoginForm = () => {
+const LoginForm = (props: any) => {
   const [state, setState] = React.useState({
     username: '',
     password: '',
@@ -38,6 +38,9 @@ const LoginForm = () => {
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     setSubmit(true);
+    if (state.username && state.password) {
+      props.toHome();
+    }
   }
 
   return (
