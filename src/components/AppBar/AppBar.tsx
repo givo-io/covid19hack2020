@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 import Button from '../Button';
 import testImage from '../../assets/test.png';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const AppBar = () => {
+const AppBar = (props: any) => {
   const classes = useStyles();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [open, setOpen] = React.useState(false);
@@ -44,6 +45,11 @@ const AppBar = () => {
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
+
+  const handleLogout = (event: React.MouseEvent<EventTarget>) => {
+    handleClose(event);
+    props.history.push('/login')
+  }
 
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
@@ -73,9 +79,9 @@ const AppBar = () => {
   return (
     <MuiAppBar color="transparent" position="static" className={classes.root}>
       <Toolbar disableGutters>
-        <Button className={classes.button}>Home</Button>
-        <Button className={classes.button}>Contributions</Button>
-        <Button className={classes.button}>Messages</Button>
+        <Button onClick={()=>props.history.push('/')} className={classes.button}>Home</Button>
+        <Button onClick={()=>props.history.push('/contributions')} className={classes.button}>Contributions</Button>
+        <Button onClick={()=>props.history.push('/messages')} className={classes.button}>Messages</Button>
         <Box flexGrow={1}/>
         <Typography variant="subtitle2">Dokedu UG</Typography>
         <IconButton
@@ -88,6 +94,7 @@ const AppBar = () => {
         >
           <Avatar src={testImage} className={classes.avatar} />
         </IconButton>
+        {/* TODO: This transition throws a warning in dev: "Warning: findDOMNode is deprecated in StrictMode." */}
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow
@@ -98,7 +105,7 @@ const AppBar = () => {
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-profile" onKeyDown={handleListKeyDown}>
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -110,4 +117,4 @@ const AppBar = () => {
   )
 }
 
-export default AppBar;
+export default withRouter(AppBar);

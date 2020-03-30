@@ -5,4 +5,4 @@ export default {
   title: 'Views/Page',
 };
 
-export const Component = () => <Page>test Page</Page>;
+export const Component = () => <Page />;
