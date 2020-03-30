@@ -17,8 +17,8 @@ import Button from '../../components/Button';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '730px',
-      height: '412px',
+      maxWidth: '730px',
+      maxHeight: '412px',
       borderRadius: 20,
       background: '#232323',
     },
